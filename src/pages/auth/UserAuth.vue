@@ -94,23 +94,20 @@ export default {
 
       this.loading = true;
       try {
-        // send htttp request...
         if (this.mode === 'login') {
           await this.$store.dispatch('login', {
             email: this.email,
             password: this.password,
           });
-
-          this.$router.replace('/');
-
         } else {
           await this.$store.dispatch('signup', {
             email: this.email,
             password: this.password,
           });
-
-          this.$router.replace('/');
         }
+        const redirectUrl = "/" + (this.$route.query.redirect || 'coaches');
+
+        this.$router.replace(redirectUrl);
       } catch (e) {
         this.error =
           e.message || 'Something went wrong while contacting this coach';
