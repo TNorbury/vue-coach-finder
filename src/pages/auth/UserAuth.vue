@@ -15,6 +15,7 @@
       <base-spinner></base-spinner>
     </base-dialog>
     <base-card>
+      <h3 v-if="!!message">{{ message }}</h3>
       <form>
         <div class="form-control">
           <label for="email">E-mail</label>
@@ -59,6 +60,7 @@ export default {
       mode: 'login',
       loading: false,
       error: null,
+      message: null,
     };
   },
   computed: {
@@ -122,6 +124,12 @@ export default {
         this.mode = 'login';
       }
     },
+  },
+
+  created() {
+    if ('mustAuth' in this.$route.query) {
+      this.message = 'You must be logged in to do that';
+    }
   },
 };
 </script>
