@@ -18,7 +18,7 @@
           <base-button mode="outline" @click="loadCoaches(true)"
             >Refresh</base-button
           >
-          <base-button v-if="!isCoach" link to="/register"
+          <base-button v-if="!isCoach && !loadingCoachData && isAuthenticated" link to="/register"
             >Register as coach</base-button
           >
         </div>
@@ -80,6 +80,9 @@ export default {
     isCoach() {
       return this.$store.getters.isCoach;
     },
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated;
+    }
   },
   methods: {
     updateFilter(filter) {

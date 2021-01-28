@@ -75,6 +75,14 @@ export default {
         userId: responseData.localId,
         tokenExpiration: responseData.expiresIn
       });
+    },
+
+    logout(context) {
+      context.commit('setUser', {
+        token: null,
+        userId: null,
+        tokenExpiration: null
+      });
     }
   },
   mutations: {
@@ -90,6 +98,9 @@ export default {
     },
     token(state) {
       return state.token;
+    },
+    isAuthenticated(state) {
+      return !!state.token;
     }
   }
 };
